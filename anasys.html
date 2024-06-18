@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>xxx</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="./img/1.jpg">
+    <!-- 引入 Vue.js 和 Element 组件库的 CSS 和 JS 文件 -->
+    <script src="./element/vue.js"></script>
+    <script src="./element/element.js"></script>
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./element/element.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="navbar">
+            <div class="logo">Hello Visitor!</div>
+            <div>
+                <el-input type="search" placeholder="请输入您想查找的内容" v-model="input4"
+                    prefix-icon="el-icon-search"></el-input>
+            </div>
+            <div class="nav-links">
+                <a href="./home.html">首页</a>
+                <a class="zhizhen" href="./generate.html">生成文案</a>
+                <a class="zhizhen" href="./anasys.html">评价文案</a>
+            </div>
+        </div>
+        <!-- 登录界面 -->
+        <el-card class="elCard">
+            <div class="main">
+                <h2>在线评价文案</h2>
+                <el-form>
+                    <el-form-item label="请输入一段想评价的文本：">
+                        <el-input type="textarea" :rows="5" v-model="username" placeholder="输入"></el-input>
+                    </el-form-item>
+                    <el-form-item label="分析结果：" style="overflow-y: scroll;height: 40vh;">
+                        <!-- <el-input type="textarea" :rows="5" type="password" v-model="password"
+                            placeholder="输出"></el-input> -->
+                            <div id="result" style="border: 1px solid #ccc;text-align: left;display: none;padding: 0 10px;">
+                                <div></div>
+                                <div>### 评分</div>
+                                <div>#### 语法 (7/10)</div>
+                                <div>整体语法基本正确，但有一些标点和句子结构的问题。例如，使用了大量的表情符号而不是标准的标点，部分句子缺乏明确的句子结构，显得有些混乱。</div>
+                                <div>#### 连贯性 (6/10)</div>
+                                <div>内容连贯，但段落间的衔接不够流畅。行程和食物推荐部分有些跳跃，读者需要多次回头查阅才能理解全貌。</div>
+                                <div>#### 逻辑性 (7/10)</div>
+                                <div>整体逻辑清晰，但行程安排和食物推荐部分可以更加紧密地结合起来。部分内容顺序有些不合理，比如行程描述和食物推荐混杂在一起。</div>
+                                <div>#### 多样性 (8/10)</div>
+                                <div>内容多样，包括行程、餐馆推荐、价格和个人体验。这些信息对读者非常有帮助。</div>
+                            </div>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="anasys" style="width: 450px;">
+                            开始评价
+                        </el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+        </el-card>
+    </div>
+</body>
+
+<script>
+    // 创建 Vue 实例
+    new Vue({
+        el: '#app',
+        data: {
+            activeTab: 'main',
+            username: '',
+            password: '',
+            message: '',
+            rating: 0,
+            fullscreenLoading: false,
+            input4: '',
+        },
+        methods: {
+            anasys() {
+                const loading = this.$loading({
+                    lock: true,
+                    text: '请耐心等待，正在分析您的文案。',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
+                setTimeout(() => {
+                    loading.close();
+                    document.getElementById('result').style.display = 'block'
+                }, 2000);
+            },
+
+        }
+    });
+</script>
+
+</html>

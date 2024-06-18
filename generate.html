@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xxx</title>
+    <!-- 引入 Vue.js 和 Element 组件库的 CSS 和 JS 文件 -->
+    <script src="./element/vue.js"></script>
+    <link rel="stylesheet" href="./css/home.css">
+    <script src="./element/element.js"></script>
+    <link rel="stylesheet" href="./element/element.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body style="background: -webkit-linear-gradient(left, #927fd1, #b1f9fa, #4f9cef, #cab9e7);">
+    <div id="app">
+
+        <div class="navbar">
+            <div class="logo">Hello Visitor!</div>
+            <div>
+                <el-input type="search" placeholder="请输入您想查找的内容" v-model="input4"
+                    prefix-icon="el-icon-search"></el-input>
+            </div>
+            <div class="nav-links">
+                <a href="./home.html">首页</a>
+                <a class="zhizhen" href="./generate.html">生成文案</a>
+                <a class="zhizhen" href="./anasys.html">评价文案</a>
+            </div>
+        </div>
+
+        <!-- 假设这里是网页的主要内容 -->
+        <div
+            style="width: 70vw;height: 92vh;margin: 65px auto 0 auto;text-align: center;background: #fff;border-radius: 20px;">
+            <h2 style="padding-top: 20px;">------智能文案生成------</h2>
+            <div @click="addText"
+                style="margin: 50px auto 5px auto;  text-align: left;width: 50vw;font-size: 20px;font-family: serif;font-weight: bold;">
+                生成文案：</div>
+            <div style="overflow-y: scroll;width: 55vw;height: 70vh;margin: 0 auto;padding-left: 5vw;">
+                <div style="width: 50vw;margin: 0 auto;padding: 0 20px;" v-for="(item) in textArr">
+                    <p style="text-align: justify;padding: 0;"> {{item}} </p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                input4: "",
+                textArr: []
+
+
+            },
+            mounted() {
+                this.openFullScreen()
+                setTimeout(() => {
+                    this.addText()
+                }, 4000);
+            },
+            methods: {
+                openFullScreen() {
+                    const loading = this.$loading({
+                        lock: true,
+                        text: '请耐心等待，正在分析您的文案。',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    setTimeout(() => {
+                        loading.close();
+                    }, 3000);
+                },
+                addText() {
+                    // document.getElementById('text').innerText = '测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字测试文字'
+                    this.textArr = [
+                        '广州两天一夜游攻略｜打卡白云山 🌄✨',
+                        'Day 1',
+                        '早上',
+                        '广州塔 & 珠江新城',
+                        '广州塔：早晨登上广州塔，俯瞰广州全景。早上的空气清新，视野开阔，拍照非常漂亮。',
+                        '珠江新城：随后前往珠江新城，这里有很多现代化的建筑和购物中心，可以随意逛逛。',
+                        '中午',
+                        '午餐推荐：点都德',
+                        '享用地道的粤式早茶，推荐虾饺、凤爪、叉烧包等经典点心。',
+                        '下午',
+                        '白云山',
+                        '白云山：下午前往白云山，这是广州的著名景点之一，适合徒步和欣赏自然风光。可以乘坐缆车上山，途中还可以参观五羊雕塑和云台花园。',
+                        '晚上',
+                        '上下九步行街 & 沙面',
+                        '上下九步行街：晚餐可以在上下九步行街品尝地道的小吃，如肠粉、沙爹牛肉串等。',
+                        '沙面：晚餐后前往沙面，这里有许多欧式建筑，夜景非常美，可以散步拍照。',
+                        'Day 2',
+                        '早上',
+                        '陈家祠 & 广州博物馆',
+                        '陈家祠：早上参观陈家祠，这是一座保存完好的传统岭南建筑，内有精美的木雕和砖雕。广州博物馆：接着前往广州博物馆，了解广州的历史和文化。',
+                        '中午',
+                        '午餐推荐：炳胜品味',
+                        '尝试一些地道的广府菜，如豉汁蒸排骨、白切鸡等。',
+                        '下午',
+                        '花城广场 & 广州图书馆',
+                        '花城广场：午餐后前往花城广场，这里是广州的城市名片之一，周围有很多现代化的建筑。',
+                        '广州图书馆：花城广场旁边就是广州图书馆，建筑非常现代化，适合拍照和短暂休息。',
+                        '傍晚',
+                        '黄埔古港',
+                        '黄埔古港：傍晚前往黄埔古港，感受古代广州作为重要港口的历史风貌，可以沿着河边散步，品尝当地小吃。',
+                        '晚上',
+                        '东山口 & 文艺咖啡馆',
+                        '东山口：晚餐可以在东山口解决，这里有许多文艺范的餐厅和咖啡馆。',
+                        '文艺咖啡馆：在东山口找一家喜欢的咖啡馆，享受广州的夜晚。',
+                        '温馨提示',
+                        '交通：广州的地铁系统非常便利，建议购买羊城通卡，乘坐地铁和公交都很方便。',
+                        '穿着：广州天气比较温暖，建议穿轻便的衣服和舒适的鞋子，尤其是爬白云山时。',
+                        '防晒：记得带上防晒霜、帽子和墨镜，广州的阳光比较强烈。',
+                        '希望这篇攻略对你的广州之旅有所帮助！如果你喜欢这篇文章，记得点赞、收藏并分享给更多朋友哦~ ❤',
+
+
+
+                    ]
+
+                },
+
+            }
+        })
+    </script>
+    <script>
+
+
+    </script>
+</body>
+
+</html>

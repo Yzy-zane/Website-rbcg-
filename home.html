@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xxx</title>
+    <!-- 引入 Vue.js 和 Element 组件库的 CSS 和 JS 文件 -->
+    <script src="./element/vue.js"></script>
+    <script src="./element/element.js"></script>
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./element/element.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<style>
+
+</style>
+
+<body style="background-image: url('./img/1.png');background-size: cover;">
+    <div id="app">
+        <div class="navbar">
+            <div class="logo">Hello Visitor!</div>
+            <div>
+                <el-input type="search" placeholder="请输入您想查找的内容" v-model="input4">
+                    <i class="el-icon-search" slot="suffix">
+                    </i>
+                </el-input>
+            </div>
+            <div class="nav-links">
+                <a href="./home.html">首页</a>
+                <a class="zhizhen" href="./generate.html">生成文案</a>
+                <a class="zhizhen" href="./anasys.html">评价文案</a>
+            </div>
+        </div>
+
+        <!-- 假设这里是网页的主要内容 -->
+        <div class="content">
+            <div style="width: 100%;">
+                <div class="system">个性化小红书文案生成器</div>
+            </div>
+            <el-form style="width: 65vw;margin:35vh auto 0 auto;">
+                <h3>请输入您的小红书账号主页的cookies，获取的方式如下所示：:</h3>
+                <p class="text">
+                    一、使用浏览器开发者工具。打开浏览器的开发者工具（例如,Chrome的F12或右键检查）,在登录或进行相关操
+                    作时,观察Network或XHR标签页中的请求和响应。在请求中查找包含Cookie的URL,并查看发送的Coo
+                    kie信息。此外,还可以使用浏览器的自动抓包功能,如Fiddler或Charles,来捕获网络请求并查看其中的Cookie信息。
+                </p>
+                <p class="text">二、Selenium则是一个用于自动化网页交互的库,可以通过模拟浏览器操作来获取Cookie信息。
+                    使用专门的插件或书签。例如,谷歌浏览器插件Get Cookie For
+                    FPlus可以一键获取当前网页的Cookie。或者使用JavaScript书签,通过在浏
+                    览器中运行特定的JavaScript代码来复制当前的Cookie信息。
+                </p>
+                <p class="text">
+                    三、使用编程工具。例如,使用Python的Requests库或Selenium库来发送HTTP请求并获
+                    取Cookie。Requests库允许你发送GET或POST请求,并获取响应中的Cookie信息。
+                </p>
+                <el-form-item label="">
+                    <h2>cookies:</h2>
+                    <el-input type="textarea" :rows="3" v-model="input1" placeholder="输入或粘贴您小红书账号主页的cookies"></el-input>
+                </el-form-item>
+                <el-form-item label="">
+                    <h2>描述您要生成的文字类型:</h2>
+                    <el-input type="textarea" :rows="3" v-model="input2" placeholder="输入生成文字类型要求"></el-input>
+                </el-form-item>
+                <el-form-item style="text-align: center;">
+                    <el-button type="primary" style="width: 150px;margin: 0 auto;" @click="dialogVisible = true">
+                        提交
+                    </el-button>
+                </el-form-item>
+            </el-form>
+        </div>
+        <el-dialog title="提示" :visible.sync="dialogVisible" width="30vw" top="20vh">
+            <div style="font-size: 18px;">请等待:
+                <span style="color: red;">{{time}}秒</span>，
+                我们正在分析您的文案，以便生成更具您个人特色特色的文案。
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="toGenerate">确 定</el-button>
+            </span>
+        </el-dialog>
+    </div>
+
+
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            input1: '',
+            input2: '',
+            activeTab: 'main',
+            cookie: "",
+            dialogVisible: false,
+            time: 120,
+        },
+        mounted() {
+            setInterval(() => {
+                this.timeCompute()
+                if(this.time == 0){
+                    this.toGenerate()
+                }
+            }, 1000)
+        },
+        methods: {
+            timeCompute() {
+                this.time -= 1
+            },
+            toGenerate() {
+                this.dialogVisible = false 
+                window.location.href = './generate.html'
+            }
+        }
+    })
+</script>
+
+</html>
