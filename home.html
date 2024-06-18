@@ -71,8 +71,9 @@
             </el-form>
         </div>
         <el-dialog title="提示" :visible.sync="dialogVisible" width="30vw" top="20vh">
-            <div style="font-size: 18px;">请等待:
-                <span style="color: red;">{{time}}秒</span>，
+            <div style="font-size: 18px;">
+                <!-- 请等待:
+                <span style="color: red;">{{time}}秒</span>， -->
                 我们正在分析您的文案，以便生成更具您个人特色特色的文案。
             </div>
             <span slot="footer" class="dialog-footer">
@@ -95,16 +96,16 @@
             time: 120,
         },
         mounted() {
-            setInterval(() => {
-                this.timeCompute()
-                if(this.time == 0){
-                    this.toGenerate()
-                }
-            }, 1000)
+            // setInterval(() => {
+            //     this.timeCompute()
+            //     if(this.time == 0){
+            //         this.toGenerate()
+            //     }
+            // }, 1000)
         },
         methods: {
             timeCompute() {
-                this.time -= 1
+                // this.time -= 1
             },
             toGenerate() {
                 this.dialogVisible = false 
